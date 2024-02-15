@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form {
+            width: fit-content;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #000;
+        }
+
+        .form label {
+            display: inline-block;
+            width: 100px;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="" class="form" name="form" onsubmit="onSubmit()">
+        <div>
+            <label for="name">名前</label>
+            <input type="text" name="name" id="name" placeholder="田中太郎" required>
+        </div>
+
+        <div>
+            <label for="hire-date">就職年月日</label>
+            <input type="date" name="hire-date" id="hire-date" value="2022-05-20" required>
+        </div>
+
+        <div>
+            <label for="role">役職</label>
+            <select name="role" id="role">
+                <option value="tutti">tutti</option>
+                <option value="首席(代行)">首席(代行)</option>
+                <option value="次席">次席</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="submit-button">
+                <input type="submit" id="submit-button" value="登録">
+            </label>
+        </div>
+
+    </form>
+
+    <table>
+        <tr>
+            <th>名前</th>
+            <th>就職年月日</th>
+            <th>勤続年数</th>
+            <th>一般年休</th>
+            <th>役職</th>
+            <th>最低勤務日数</th>
+        </tr>
+        <tr>
+            <td>肥田幸久</td>
+            <td>2019-03-29</td>
+            <td>5</td>
+            <td>14</td>
+            <td>tutti</td>
+            <td>192</td>
+        </tr>
+    </table>
+
+    <script>
+
+        function getYearsFromMS(ms) {
+            const years = Math.ceil(ms / 1000 / 60 / 60 / 24 / 365);
+            return years;
+        }
+
+        function getAnnualLeaveFromYearsOfWork(years) {
+            if (years === 1) return 8;
+            else if (years === 2) return 10;
+            else if (years === 3) return 12;
+            else if (years === 4) return 13;
+            else if (years === 5) return 14;
+            else if (years === 6) return 15;
+            else if (years === 7) return 16;
+            else if (years === 8) return 16;
+            else if (years === 9) return 17;
+            else if (years >= 10) return 18;
+            else return "ERR";
+        }
+
+        function getMinWorkingDaysFromRole(role) {
+            switch (role) {
+                case "首席(代行)":
+                    return 168;
+
+                case "次席":
+                    return 180;
+
+                case "tutti":
+                    return 192;
+
+                default:
+                    return "ERR";
+            }
+        }
+
+
+        function onSubmit() {
+            // 名前
+            const name = document.getElementById("name").value;
+
+            // 就職年月日
+            const hireDate = document.getElementById("hire-date").valueAsDate;
+
+            // 役職
+            const role = document.getElementById("role").value;
+
+            const now = Date.now();
+            const hireTime = hireDate.getTime();
+
+            // 勤続年数
+            const yearsOfWork = getYearsFromMS(now - hireTime);
+
+            // 一般年休
+            const annualLeave = getAnnualLeaveFromYearsOfWork(yearsOfWork);
+
+            // 最低勤務日数
+            const minWorkingDays = getMinWorkingDaysFromRole(role);
+
+            console.log(name, hireDate, yearsOfWork, annualLeave, role, minWorkingDays);
+        }
+
+    </script>
+</body>
+
+</html>
