@@ -10,6 +10,9 @@
             width: fit-content;
             margin: auto;
             padding: 20px;
+        }
+
+        .add-form {
             border: 1px solid #000;
         }
 
@@ -18,12 +21,34 @@
             width: 100px;
             padding: 5px;
         }
+
+        #personal-data {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: solid 1px;
+            padding: 10px;
+        }
+
+        .td-left {
+            text-align: left;
+        }
+
+        .td-center {
+            text-align: center;
+        }
+
+        .td-right {
+            text-align: right;
+        }
     </style>
 </head>
 
 <body>
 
-    <form action="" class="form" name="form" onsubmit="onSubmit()">
+    <form action="" class="form add-form" name="form" onsubmit="onSubmit()">
         <div>
             <label for="name">名前</label>
             <input type="text" name="name" id="name" placeholder="田中太郎" required>
@@ -51,24 +76,37 @@
 
     </form>
 
-    <table>
-        <tr>
-            <th>名前</th>
-            <th>就職年月日</th>
-            <th>勤続年数</th>
-            <th>一般年休</th>
-            <th>役職</th>
-            <th>最低勤務日数</th>
-        </tr>
-        <tr>
-            <td>肥田幸久</td>
-            <td>2019-03-29</td>
-            <td>5</td>
-            <td>14</td>
-            <td>tutti</td>
-            <td>192</td>
-        </tr>
-    </table>
+    <form action="" class="form list-form">
+        <table id="personal-data">
+            <tr>
+                <th>名前</th>
+                <th>就職年月日</th>
+                <th>勤続年数</th>
+                <th>一般年休</th>
+                <th>役職</th>
+                <th>最低勤務日数</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td class="td-left">肥田幸久</td>
+                <td class="td-left">2019-03-29</td>
+                <td class="td-right">5</td>
+                <td class="td-right">14</td>
+                <td class="td-center">tutti</td>
+                <td class="td-right">192</td>
+                <td class="delete-btn"><input type="submit" value="削除"></td>
+            </tr>
+            <tr>
+                <td class="td-left">薬師寺さあや</td>
+                <td class="td-left">2018-02-01</td>
+                <td class="td-right">7</td>
+                <td class="td-right">16</td>
+                <td class="td-center">首席(代行)</td>
+                <td class="td-right">168</td>
+                <td class="delete-btn"><input type="submit" value="削除"></td>
+            </tr>
+        </table>
+    </form>
 
     <script>
 
